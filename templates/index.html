@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Travel Agent</title>
+</head>
+<body>
+
+    <h1>AI Travel Planner</h1>
+
+    <form method="POST">
+
+        <label>From City:</label><br>
+        <input type="text" name="from_city" required><br><br>
+
+        <label>Destination City:</label><br>
+        <input type="text" name="to_city" required><br><br>
+
+        <label>Travel Date:</label><br>
+        <input type="date" name="date" required><br><br>
+
+        <label>Travelers:</label><br>
+        <input type="number" name="travelers" required><br><br>
+
+        <label>Budget:</label><br>
+        <input type="number" name="budget" required><br><br>
+
+        <button type="submit">Generate Travel Plan</button>
+
+    </form>
+
+    <hr>
+
+    {% if result %}
+        <h2>Result:</h2>
+        <pre>{{ result }}</pre>
+    {% endif %}
+
+</body>
+</html>
