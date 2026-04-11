@@ -1,9 +1,4 @@
-from agents.climate_agent import check_climate
-from agents.hotel_agent import search_hotels
 from flask import Flask, request, render_template
-from agents.requirement_checker import check_requirements
-from agents.planning_agent import create_plan
-from agents.flight_agent import search_flights
 from orchestrator import run_orchestrator
 
 app = Flask(__name__)
@@ -21,22 +16,11 @@ def index():
             "budget": request.form.get("budget")
         }
 
-        check = check_requirements(data)
+        # Call orchestrator (this runs ALL agents)
+        result = run_orchestrator(data)
 
-        if check != "All requirements satisfied":
-            result = check
-        else:
-            result =run_orchestrator(data)
-            flights = search_flights(data)
-            hotels = search_hotels(data)
-            climate = check_climate(data)
-from flask import Flask
+    return render_template("index.html", result=result)
 
-app = Flask(__name__)
-
-@app.route("/")
-def home():
-    return "Flask is working!"
 
 if __name__ == "__main__":
     app.run(debug=True)
